@@ -17,7 +17,7 @@ export async function connect() {
       process.exit();
     });
     mongoose.connect(process.env.MONGO_URL);
-  } catch (error) {
+  } catch (error: any) {
     if (!(error instanceof Error)) {
       error = new Error(error);
     }
