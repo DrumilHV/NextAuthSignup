@@ -37,19 +37,20 @@ export const sendEmail = async ({
         pass: process.env.NODEMAILER_PASS,
       },
     });
+    const verificationLink = `${process.env.DOMAIN}/verifyemail/?token=${hashedToken}`;
+    const htmlModels = `Hi there, <br>
+      click <a href="${verificationLink}">here</a> to 
+      ${emailType === "VERIFY" ? "verify" : "reset your password"},<br>
+      or copy and paset the below link in your browser.
+      ${verificationLink}
+      `; // html body
     const mailOptions = {
       from: "drumilhved@gmail.com",
       to: email,
       subject:
         emailType === "VERIFY" ? "verification code" : "reset your password",
 
-      html: `clicl<a href="${
-        process.env.DOMAIN
-      }/verifyemail/${hashedToken}">here</a> to 
-      ${emailType === "VERIFY" ? "verify" : "reset your password"},
-      or copy and paset the below link in your browser.
-      ${process.env.DOMAIN}/verifyemail/${hashedToken}
-      `, // html body
+      html: htmlModels,
     };
     const mailResponse = await transport.sendMail(mailOptions);
     return mailResponse;
