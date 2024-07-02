@@ -6,6 +6,7 @@ connect();
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("on verify mail");
     const reqBody = await request.json();
     const { token } = reqBody;
     console.log(token);

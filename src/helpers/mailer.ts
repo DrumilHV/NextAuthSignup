@@ -19,13 +19,17 @@ export const sendEmail = async ({
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
     if (emailType === "VERIFY") {
       await User.findByIdAndUpdate(userId, {
-        verifyToken: hashedToken,
-        verifyTokenExpiry: Date.now() + 3600000,
+        $set: {
+          verifyToken: hashedToken,
+          verifyTokenExpiry: Date.now() + 3600000,
+        },
       });
     } else if (emailType === "RESET") {
       await User.findByIdAndUpdate(userId, {
-        forgotPasswordToken: hashedToken,
-        forgotPasswordTokenExpiry: Date.now() + 3600000,
+        $set: {
+          forgotPasswordToken: hashedToken,
+          forgotPasswordTokenExpiry: Date.now() + 3600000,
+        },
       });
     }
 
@@ -37,7 +41,7 @@ export const sendEmail = async ({
         pass: process.env.NODEMAILER_PASS,
       },
     });
-    const verificationLink = `${process.env.DOMAIN}/verifyemail/?token=${hashedToken}`;
+    const verificationLink = `${process.env.DOMAIN}/users/verifyemail?token=${hashedToken}`;
     const htmlModels = `Hi there, <br>
       click <a href="${verificationLink}">here</a> to 
       ${emailType === "VERIFY" ? "verify" : "reset your password"},<br>
