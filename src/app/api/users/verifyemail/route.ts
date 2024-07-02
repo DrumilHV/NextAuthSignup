@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
     if (!user) {
       return NextResponse.json({ error: "Invalid token" }, { status: 400 });
     }
+    //
     console.log(user);
     user.verifyToken = undefined;
     user.verifyTokenExpiry = undefined;
@@ -28,7 +29,6 @@ export async function POST(request: NextRequest) {
     );
   } catch (error: any) {
     console.error("error in Verify email !", error);
-
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
