@@ -62,5 +62,3 @@ export const sendEmail = async ({
     throw new Error(error.message);
   }
 };
-// http://localhost:3000/api/users/verifyemail?token=$2a$10$IV5ymYF5N/GR0Rz8xnDvWOq2XL6dtH0gsnJt.e8/Ocmxd91kkQZwC
-// https://localhost:3000/api/users/verifyemail?token=$2a$10$Qoa1CYqjF8TxseYFCkh5C.FsPoM039e2BV4NEDCXnBob7EOchaKOm
