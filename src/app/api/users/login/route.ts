@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       expiresIn: "1d",
     });
     const response = NextResponse.json(
-      { message: "Login successfull !" },
+      { message: "Login successfull !", success: true },
       { status: 200 }
     );
     response.cookies.set("token", token, {

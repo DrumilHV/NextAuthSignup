@@ -41,7 +41,7 @@ export const sendEmail = async ({
         pass: process.env.NODEMAILER_PASS,
       },
     });
-    const verificationLink = `${process.env.DOMAIN}/users/verifyemail?token=${hashedToken}`;
+    const verificationLink = `${process.env.DOMAIN}/api/users/verifyemail?token=${hashedToken}`;
     const htmlModels = `Hi there, <br>
       click <a href="${verificationLink}">here</a> to 
       ${emailType === "VERIFY" ? "verify" : "reset your password"},<br>
@@ -62,3 +62,5 @@ export const sendEmail = async ({
     throw new Error(error.message);
   }
 };
+// http://localhost:3000/api/users/verifyemail?token=$2a$10$IV5ymYF5N/GR0Rz8xnDvWOq2XL6dtH0gsnJt.e8/Ocmxd91kkQZwC
+// https://localhost:3000/api/users/verifyemail?token=$2a$10$Qoa1CYqjF8TxseYFCkh5C.FsPoM039e2BV4NEDCXnBob7EOchaKOm
